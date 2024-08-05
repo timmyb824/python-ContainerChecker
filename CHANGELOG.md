@@ -2,6 +2,21 @@
 
 
 
+## v0.1.0 (2024-08-05)
+
+### Chore
+
+* chore: Update code formatting and remove unnecessary code duplication ([`d9c9ee8`](https://github.com/timmyb824/python-ContainerChecker/commit/d9c9ee83dd81c41a22f22acb7299ffa53d9617d6))
+
+### Documentation
+
+* docs: Add GNU General Public License v3 to the project ([`daa6469`](https://github.com/timmyb824/python-ContainerChecker/commit/daa6469b9c18841b8117c33a1728713ad80d6940))
+
+### Feature
+
+* feat: Add pre-commit configuration and Sourcery settings files ([`3987863`](https://github.com/timmyb824/python-ContainerChecker/commit/3987863acf2f528ef1271310d8f9754a3bee8083))
+
+
 ## v0.0.0 (2024-08-05)
 
 ### Chore
