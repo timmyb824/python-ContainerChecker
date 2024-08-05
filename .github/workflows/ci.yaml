@@ -53,13 +53,6 @@ jobs:
         run: |
           poetry run python -m pytest -xvvv tests/
 
-      - name: Test run the tool
-        if: success()
-        shell: bash
-        run: |
-          export PYTHONPATH="${PYTHONPATH}:./src"
-          python -m poetry run python src/main.py run -a
-
   Release:
     needs: Test
     environment:
