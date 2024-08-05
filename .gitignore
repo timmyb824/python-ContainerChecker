@@ -1,0 +1,5 @@
+servers.yaml
+.venv/
+__pycache__/
+Archive/
+.github/
