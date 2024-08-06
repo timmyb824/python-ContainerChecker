@@ -39,9 +39,10 @@ def display_containers(ssh_client, package_name, host):
     logger.debug(f"Displaying running {package_name} containers on {host}")
     if containers := get_running_containers(ssh_client, package_name):
         sorted_containers = sort_containers(containers)
+        num_containers = len(sorted_containers)
         #  sourcery skip: extract-method
         print(
-            f"Running {package_name.capitalize()} containers on [bold green]{host}[/bold green]:"
+            f"{num_containers} running {package_name.capitalize()} containers on [bold green]{host}[/bold green]:"
         )
         table = Table()
         table.add_column("Name", style="cyan", no_wrap=True)
