@@ -7,8 +7,8 @@ with warnings.catch_warnings(action="ignore", category=CryptographyDeprecationWa
     import paramiko
 from rich import print  # pylint: disable=redefined-builtin
 
-from constants import console
-from containers import check_installed_package, display_containers
+from src.constants import console
+from src.containers import check_installed_package, display_containers
 
 logger = logging.getLogger("rich")
 
