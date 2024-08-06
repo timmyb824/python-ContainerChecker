@@ -2,6 +2,19 @@
 
 
 
+## v0.2.2 (2024-08-06)
+
+### Refactor
+
+* refactor: Update imports in multiple files to include the correct path from src folder ([`82e9379`](https://github.com/timmyb824/python-ContainerChecker/commit/82e93797740df29cba2dde32a446b9b93310417c))
+
+### Unknown
+
+* Merge pull request #3 from timmyb824/fix/import-issue-again
+
+refactor: Update imports in multiple files to include the correct path from src folder ([`2368ab2`](https://github.com/timmyb824/python-ContainerChecker/commit/2368ab2534d3e2b49efb395fd693dfd177880d4a))
+
+
 ## v0.2.1 (2024-08-06)
 
 ### Refactor
