@@ -2,6 +2,25 @@
 
 
 
+## v0.2.1 (2024-08-06)
+
+### Refactor
+
+* refactor: Update imports to use relative import paths in containers, main, and ssh modules ([`20870b1`](https://github.com/timmyb824/python-ContainerChecker/commit/20870b1db6a5132cb7b9b0dbee7037c03a5c46ad))
+
+* refactor: Rename function to improve clarity and consistency in naming conventions ([`a6abfce`](https://github.com/timmyb824/python-ContainerChecker/commit/a6abfce8f9c3ef56e2c4f3b08dd0b4a52a582ba2))
+
+### Style
+
+* style: Remove tabulate from dependencies and update rich version to &#34;^13.7.1&#34; ([`8eff971`](https://github.com/timmyb824/python-ContainerChecker/commit/8eff971f9a7d9619051ac82408a65135a89175ab))
+
+### Unknown
+
+* Merge pull request #2 from timmyb824/fix/import-issue
+
+fix/import issue ([`d6d6c38`](https://github.com/timmyb824/python-ContainerChecker/commit/d6d6c3802ede83d7f4cfb7371147462eaad6f719))
+
+
 ## v0.2.0 (2024-08-06)
 
 ### Documentation
