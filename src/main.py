@@ -1,8 +1,8 @@
 import argparse
 
-from config import read_yaml_file
-from log_handler import setup_logging
-from ssh import process_server
+from src.config import read_yaml_file
+from src.log_handler import setup_logging
+from src.ssh import process_server
 
 
 def parse_args():
