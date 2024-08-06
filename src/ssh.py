@@ -5,6 +5,7 @@ from cryptography.utils import CryptographyDeprecationWarning
 
 with warnings.catch_warnings(action="ignore", category=CryptographyDeprecationWarning):
     import paramiko
+from rich import print
 
 from src.constants import console
 from src.containers import check_installed_package, display_containers
@@ -55,7 +56,9 @@ def process_server(host, port, user, password, ssh_key, ssh_key_password):
         elif check_installed_package(ssh_client, "docker"):
             display_containers(ssh_client, "docker", host)
         else:
-            console.print(f"Neither Podman nor Docker is installed on {host}.")
+            print(
+                f"Neither Podman nor Docker is installed on [bold yellow]{host}[/bold yellow]."
+            )
 
     except Exception as e:
         logger.exception(f"Failed to connect to {host}: {e}")
