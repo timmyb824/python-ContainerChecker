@@ -4,7 +4,7 @@ from unittest.mock import Mock
 
 from cryptography.utils import CryptographyDeprecationWarning
 
-from src.ssh import create_ssh_client
+from containerchecker.ssh import create_ssh_client
 
 with warnings.catch_warnings(action="ignore", category=CryptographyDeprecationWarning):
     import paramiko
@@ -14,7 +14,9 @@ class TestSSH(unittest.TestCase):
     def test_create_ssh_client_with_password_authentication(self):
         ssh_client = Mock()
         ssh_client.connect.return_value = None
-        with unittest.mock.patch("src.ssh.paramiko.SSHClient", return_value=ssh_client):
+        with unittest.mock.patch(
+            "containerchecker.ssh.paramiko.SSHClient", return_value=ssh_client
+        ):
             result = create_ssh_client("hostname", 22, "username", "password")
             self.assertIsNotNone(result)
             ssh_client.connect.assert_called_once_with(
@@ -26,9 +28,10 @@ class TestSSH(unittest.TestCase):
         ssh_client.connect.return_value = None
         key = Mock()
         with unittest.mock.patch(
-            "src.ssh.paramiko.SSHClient", return_value=ssh_client
+            "containerchecker.ssh.paramiko.SSHClient", return_value=ssh_client
         ), unittest.mock.patch(
-            "src.ssh.paramiko.Ed25519Key.from_private_key_file", return_value=key
+            "containerchecker.ssh.paramiko.Ed25519Key.from_private_key_file",
+            return_value=key,
         ):
             result = create_ssh_client(
                 "hostname",
