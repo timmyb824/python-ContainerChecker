@@ -5,7 +5,7 @@ import yaml
 logger = logging.getLogger("rich")
 
 
-def read_yaml(file_path):
+def read_yaml_file(file_path):
     """Reads a YAML file and returns its contents as a dictionary."""
     try:
         with open(file_path, "r", encoding="utf-8") as file:
