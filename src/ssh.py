@@ -1,3 +1,4 @@
+import logging
 import warnings
 
 from cryptography.utils import CryptographyDeprecationWarning
@@ -5,12 +6,17 @@ from cryptography.utils import CryptographyDeprecationWarning
 with warnings.catch_warnings(action="ignore", category=CryptographyDeprecationWarning):
     import paramiko
 
+from src.constants import console
 from src.containers import check_installed_package, display_containers
+
+logger = logging.getLogger("rich")
 
 
 def create_ssh_client(
     hostname, port, username, password=None, key_filename=None, key_password=None
 ):
+    """Create an SSH client object."""
+    logger.debug(f"Creating SSH client for {hostname}")
     try:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -24,37 +30,35 @@ def create_ssh_client(
             ssh.connect(hostname, port, username=username, password=password)
         return ssh
     except paramiko.AuthenticationException as e:
-        print(f"Authentication failed: {e}")
+        logger.exception(f"Authentication failed: {e}")
     except paramiko.SSHException as e:
-        print(f"SSH connection failed: {e}")
+        logger.exception(f"SSH connection failed: {e}")
     except Exception as e:
-        print(f"An error occurred: {e}")
+        logger.exception(f"An error occurred: {e}")
     return None
 
 
 def process_server(host, port, user, password, ssh_key, ssh_key_password):
+    """Process a server."""
+    logger.debug(f"Processing server: {host}")
     try:
         ssh_client = create_ssh_client(
             host, port, user, password, ssh_key, ssh_key_password
         )
 
         if ssh_client is None:
-            print(f"Failed to connect to {host}")
+            console.print(f"Failed to connect to {host}")
             return
 
-        print(f"Server: {host}")
-
         if check_installed_package(ssh_client, "podman"):
-            print("Podman is installed.")
-            display_containers(ssh_client, "podman")
+            display_containers(ssh_client, "podman", host)
         elif check_installed_package(ssh_client, "docker"):
-            print("Docker is installed.")
-            display_containers(ssh_client, "docker")
+            display_containers(ssh_client, "docker", host)
         else:
-            print("Neither Podman nor Docker is installed.")
+            console.print(f"Neither Podman nor Docker is installed on {host}.")
 
     except Exception as e:
-        print(f"Failed to connect to {host}: {e}")
+        logger.exception(f"Failed to connect to {host}: {e}")
     finally:
         if "ssh_client" in locals() and ssh_client:
             ssh_client.close()
