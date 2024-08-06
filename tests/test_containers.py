@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
 
-from src.containers import check_installed_package, get_running_containers
+from containerchecker.containers import check_installed_package, get_running_containers
 
 
 class TestContainers(unittest.TestCase):

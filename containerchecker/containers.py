@@ -3,7 +3,7 @@ import logging
 from rich import print  # pylint: disable=redefined-builtin
 from rich.table import Table
 
-from src.constants import console
+from containerchecker.constants import console
 
 logger = logging.getLogger("rich")
 

@@ -4,7 +4,7 @@ version = "0.2.2"
 description = ""
 authors = ["Tim Bryant <timothybryant3@gmail.com>"]
 readme = "README.md"
-packages = [{include = "src", from = "."}]
+packages = [{include = "containerchecker", from = "."}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -23,11 +23,11 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 pythonpath = [
-  ".", "src"
+  ".", "containerchecker"
 ]
 
 [tool.poetry.scripts]
-pcc = "src.main:main"
+pcc = "containerchecker.main:main"
 
 [tool.semantic_release.commit_parser_options]
 allowed_tags = [

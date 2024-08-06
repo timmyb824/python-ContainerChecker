@@ -1,8 +1,8 @@
 import argparse
 
-from src.config import read_yaml_file
-from src.log_handler import setup_logging
-from src.ssh import process_server
+from containerchecker.config import read_yaml_file
+from containerchecker.log_handler import setup_logging
+from containerchecker.ssh import process_server
 
 
 def parse_args():

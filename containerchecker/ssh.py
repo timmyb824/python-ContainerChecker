@@ -5,10 +5,11 @@ from cryptography.utils import CryptographyDeprecationWarning
 
 with warnings.catch_warnings(action="ignore", category=CryptographyDeprecationWarning):
     import paramiko
+
 from rich import print  # pylint: disable=redefined-builtin
 
-from src.constants import console
-from src.containers import check_installed_package, display_containers
+from containerchecker.constants import console
+from containerchecker.containers import check_installed_package, display_containers
 
 logger = logging.getLogger("rich")
 
