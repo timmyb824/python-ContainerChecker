@@ -1,8 +1,8 @@
 import argparse
 
-from src.config import read_yaml
-from src.log_handler import setup_logging
-from src.ssh import process_server
+from config import read_yaml_file
+from log_handler import setup_logging
+from ssh import process_server
 
 
 def parse_args():
@@ -26,7 +26,7 @@ def main():
     if args.verbose:
         logger.debug("Verbose output enabled")
 
-    servers = read_yaml(args.file)
+    servers = read_yaml_file(args.file)
 
     if servers is None:
         logger.error(f"Failed to read servers from {args.file}")
