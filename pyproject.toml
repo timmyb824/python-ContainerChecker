@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-containerchecker"
-version = "0.2.3"
+version = "0.3.0"
 description = ""
 authors = ["Tim Bryant <timothybryant3@gmail.com>"]
 readme = "README.md"

@@ -2,6 +2,19 @@
 
 
 
+## v0.3.0 (2024-08-06)
+
+### Feature
+
+* feat: add number of containers running to output ([`670e59f`](https://github.com/timmyb824/python-ContainerChecker/commit/670e59f8038fe58ac200bc32a0d5497a320f08d6))
+
+### Unknown
+
+* Merge pull request #5 from timmyb824/feat/add-ct-count
+
+feat: add number of containers running to output ([`6ea3361`](https://github.com/timmyb824/python-ContainerChecker/commit/6ea33611df25b11e947f52ca08f4f8f1c3de517c))
+
+
 ## v0.2.3 (2024-08-06)
 
 ### Refactor
