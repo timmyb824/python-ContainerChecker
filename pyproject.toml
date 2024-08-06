@@ -27,6 +27,9 @@ pythonpath = [
   ".", "src"
 ]
 
+[tool.poetry.scripts]
+pcc = "src.main:main"
+
 [tool.semantic_release.commit_parser_options]
 allowed_tags = [
     "build",
