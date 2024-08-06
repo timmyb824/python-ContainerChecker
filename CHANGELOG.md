@@ -2,6 +2,19 @@
 
 
 
+## v0.4.0 (2024-08-06)
+
+### Feature
+
+* feat: Introduce concurrent processing for server connections ([`fe3ca8e`](https://github.com/timmyb824/python-ContainerChecker/commit/fe3ca8e94b9b42bff74221ddeda3470e7d58910a))
+
+### Unknown
+
+* Merge pull request #6 from timmyb824/feat/speed-up-processing
+
+feat: Introduce concurrent processing for server connections ([`17c79ea`](https://github.com/timmyb824/python-ContainerChecker/commit/17c79ea3adfedb1925581077e87b0582ee863c88))
+
+
 ## v0.3.0 (2024-08-06)
 
 ### Feature
