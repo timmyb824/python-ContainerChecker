@@ -1,4 +1,5 @@
 import argparse
+import concurrent.futures
 
 from containerchecker.config import read_yaml_file
 from containerchecker.log_handler import setup_logging
@@ -32,15 +33,25 @@ def main():
         logger.error(f"Failed to read servers from {args.file}")
         return
 
-    for server in servers.get("servers", []):
-        host = server["host"]
-        port = server.get("port", 22)
-        user = server["user"]
-        password = server.get("password")
-        ssh_key = server.get("ssh_key")
-        ssh_key_password = server.get("ssh_key_password")
-
-        process_server(host, port, user, password, ssh_key, ssh_key_password)
+    server_list = servers.get("servers", [])
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        futures = [
+            executor.submit(
+                process_server,
+                server["host"],
+                server.get("port", 22),
+                server["user"],
+                server.get("password"),
+                server.get("ssh_key"),
+                server.get("ssh_key_password"),
+            )
+            for server in server_list
+        ]
+        for future in concurrent.futures.as_completed(futures):
+            try:
+                future.result()
+            except Exception as e:
+                logger.exception(f"An error occurred: {e}")
 
 
 if __name__ == "__main__":
