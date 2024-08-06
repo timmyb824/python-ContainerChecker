@@ -2,6 +2,19 @@
 
 
 
+## v0.2.3 (2024-08-06)
+
+### Refactor
+
+* refactor: Update import paths to containerchecker namespace ([`16ac1d9`](https://github.com/timmyb824/python-ContainerChecker/commit/16ac1d9beab9ca1338b1ebaae5fa0e4d02a90165))
+
+### Unknown
+
+* Merge pull request #4 from timmyb824/refactor/stop-using-src
+
+refactor: Update import paths to containerchecker namespace ([`470087d`](https://github.com/timmyb824/python-ContainerChecker/commit/470087d145854be25d7392801b2b82a330e3525d))
+
+
 ## v0.2.2 (2024-08-06)
 
 ### Refactor
