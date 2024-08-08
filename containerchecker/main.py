@@ -5,6 +5,7 @@ from containerchecker.config import read_yaml_file
 from containerchecker.constants import USER_HOME
 from containerchecker.log_handler import setup_logging
 from containerchecker.ssh import process_server
+from containerchecker.version import print_version
 
 
 def parse_args():
@@ -19,12 +20,17 @@ def parse_args():
         help="Path to servers.yaml (default: ~/.config/containerchecker/servers.yaml)",
     )
     parser.add_argument("--verbose", action="store_true", help="Enable verbose output")
+    parser.add_argument("--version", action="store_true", help="Print version and exit")
     return parser.parse_args()
 
 
 def main():
     """Main function."""
     args = parse_args()
+
+    if args.version:
+        print_version()
+        return
 
     logger = setup_logging(args.verbose)
 
