@@ -2,6 +2,19 @@
 
 
 
+## v0.7.0 (2024-08-08)
+
+### Feature
+
+* feat: Add version printing functionality and update dependencies to latest versions ([`8f5a7af`](https://github.com/timmyb824/python-ContainerChecker/commit/8f5a7af8a9a13a038f67553fe26867f3a19423d4))
+
+### Unknown
+
+* Merge pull request #9 from timmyb824/feat/add-version-command
+
+feat: Add version printing functionality and update dependencies to latest versions ([`5f3e459`](https://github.com/timmyb824/python-ContainerChecker/commit/5f3e4598a8aedfc92e629aef07a859dd18183019))
+
+
 ## v0.6.0 (2024-08-08)
 
 ### Feature
