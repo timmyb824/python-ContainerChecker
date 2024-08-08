@@ -2,6 +2,23 @@
 
 
 
+## v0.5.0 (2024-08-08)
+
+### Feature
+
+* feat: Fix incorrect decoding of SSH client response in container tests ([`82a2959`](https://github.com/timmyb824/python-ContainerChecker/commit/82a2959a529d7c57ccf70f88b29291022b0a3402))
+
+* feat: Improve error handling and logging for container checking functions; add workaround for checking containers on a synologynas ([`16378ce`](https://github.com/timmyb824/python-ContainerChecker/commit/16378ceba4063de29d638115e45000ed0818c63f))
+
+* feat: Add debug logging for container status on remote servers ([`c200dda`](https://github.com/timmyb824/python-ContainerChecker/commit/c200ddacffac1839b9d7551ff5ac7eaa200f6aea))
+
+### Unknown
+
+* Merge pull request #7 from timmyb824/feat/improve-logging-add-workaround
+
+feat: improve logging for debugging and add workaround for containers on synology nas ([`f4ce706`](https://github.com/timmyb824/python-ContainerChecker/commit/f4ce706370bc4a0e3b72ffdeaac1028f9dd61789))
+
+
 ## v0.4.0 (2024-08-06)
 
 ### Feature
