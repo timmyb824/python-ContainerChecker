@@ -28,6 +28,7 @@ def create_ssh_client(
                 key_filename, password=key_password
             )
             ssh.connect(hostname, port, username=username, pkey=key)
+            logger.debug(f"Connected to {hostname}")
         else:
             ssh.connect(hostname, port, username=username, password=password)
         return ssh
@@ -52,11 +53,26 @@ def process_server(host, port, user, password, ssh_key, ssh_key_password):
             console.print(f"Failed to connect to {host}")
             return
 
+        # # Check the environment and PATH for debugging purposes
+        # stdin, stdout, stderr = ssh_client.exec_command("echo $PATH")
+        # path_output = stdout.read().decode().strip()
+        # logger.debug(f"PATH on {host}: {path_output}")
+
         if check_installed_package(ssh_client, "podman"):
+            logger.debug(f"Podman is installed on {host}")
             display_containers(ssh_client, "podman", host)
         elif check_installed_package(ssh_client, "docker"):
+            logger.debug(f"Docker is installed on {host}")
             display_containers(ssh_client, "docker", host)
+        # TODO
+        # poor workaround for being unable to find docker on a synologynas
+        # the enviornment and path seem to be different and setting the path does not seem to work
+        # need to investigate further
+        elif check_installed_package(ssh_client, "/usr/local/bin/docker"):
+            logger.debug(f"Docker is installed on {host}")
+            display_containers(ssh_client, "/usr/local/bin/docker", host)
         else:
+            logger.debug(f"Neither Podman nor Docker is installed on {host}")
             print(
                 f"Neither Podman nor Docker is installed on [bold yellow]{host}[/bold yellow]."
             )
