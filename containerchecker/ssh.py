@@ -8,7 +8,7 @@ with warnings.catch_warnings(action="ignore", category=CryptographyDeprecationWa
 
 from rich import print  # pylint: disable=redefined-builtin
 
-from containerchecker.constants import console
+from containerchecker.constants import USER_HOME, console
 from containerchecker.containers import check_installed_package, display_containers
 
 logger = logging.getLogger("rich")
@@ -20,12 +20,13 @@ def create_ssh_client(
     """Create an SSH client object."""
     logger.debug(f"Creating SSH client for {hostname}")
     try:
+        ssh_key_file_path = f"{USER_HOME}/.ssh/{key_filename}"
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         if key_filename:
             # if using rsa keys then need to use RSAKey instead of Ed25519Key
             key = paramiko.Ed25519Key.from_private_key_file(
-                key_filename, password=key_password
+                ssh_key_file_path, password=key_password
             )
             ssh.connect(hostname, port, username=username, pkey=key)
             logger.debug(f"Connected to {hostname}")
@@ -36,6 +37,8 @@ def create_ssh_client(
         logger.exception(f"Authentication failed: {e}")
     except paramiko.SSHException as e:
         logger.exception(f"SSH connection failed: {e}")
+    except FileNotFoundError:
+        logger.exception(f"Private key file not found: {key_filename}")
     except Exception as e:
         logger.exception(f"An error occurred: {e}")
     return None
@@ -50,7 +53,7 @@ def process_server(host, port, user, password, ssh_key, ssh_key_password):
         )
 
         if ssh_client is None:
-            console.print(f"Failed to connect to {host}")
+            print(f"Failed to connect to [bold red]{host}[/bold red]\n")
             return
 
         # # Check the environment and PATH for debugging purposes
