@@ -2,6 +2,7 @@ import argparse
 import concurrent.futures
 
 from containerchecker.config import read_yaml_file
+from containerchecker.constants import USER_HOME
 from containerchecker.log_handler import setup_logging
 from containerchecker.ssh import process_server
 
@@ -12,7 +13,10 @@ def parse_args():
         description="Process servers and check for running containers."
     )
     parser.add_argument(
-        "--file", type=str, default="servers.yaml", help="Path to servers.yaml"
+        "--file",
+        type=str,
+        default=f"{USER_HOME}/.config/containerchecker/servers.yaml",
+        help="Path to servers.yaml (default: ~/.config/containerchecker/servers.yaml)",
     )
     parser.add_argument("--verbose", action="store_true", help="Enable verbose output")
     return parser.parse_args()
