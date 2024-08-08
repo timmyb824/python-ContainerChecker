@@ -10,7 +10,7 @@ class TestContainers(unittest.TestCase):
         ssh_client.exec_command.return_value = (
             None,
             Mock(read=lambda: b"package_name"),
-            None,
+            ssh_client.read().decode(),  # not sure this is a correct way to do this
         )
         self.assertTrue(check_installed_package(ssh_client, "package_name"))
 
@@ -23,7 +23,7 @@ class TestContainers(unittest.TestCase):
         ssh_client.exec_command.return_value = (
             None,
             Mock(read=lambda: b"container1 123\ncontainer2 456"),
-            None,
+            ssh_client.read().decode(),
         )
         expected_result = [["container1", "123"], ["container2", "456"]]
         self.assertEqual(get_running_containers(ssh_client, "docker"), expected_result)
@@ -34,7 +34,7 @@ class TestContainers(unittest.TestCase):
         ssh_client.exec_command.return_value = (
             None,
             Mock(read=lambda: b"container3 789"),
-            None,
+            ssh_client.read().decode(),
         )
         expected_result = [["container3", "789"]]
         self.assertEqual(get_running_containers(ssh_client, "podman"), expected_result)
