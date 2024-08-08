@@ -9,24 +9,41 @@ logger = logging.getLogger("rich")
 
 
 def check_installed_package(ssh_client, package_name):
-    """Check if a package is installed on the server."""
-    stdin, stdout, stderr = ssh_client.exec_command(f"command -v {package_name}")
-    return bool(stdout.read().decode())
+    """Check if a package is installed on the remote server."""
+    try:
+        stdin, stdout, stderr = ssh_client.exec_command(f"command -v {package_name}")
+        output = stdout.read().decode()
+        error = stderr.read().decode()
+        logger.debug(f"Command output: {output}")
+        logger.debug(f"Command error: {error}")
+        return bool(output.strip())
+    except Exception as e:
+        logger.exception(f"Failed to check installed package {package_name}: {e}")
+        return False
 
 
 def get_running_containers(ssh_client, package_name):
-    """Get running containers on the server."""
-    logger.debug(f"Getting running {package_name} containers")
-    if package_name == "docker":
-        command = 'docker ps --format "{{.Names}} {{.ID}}"'
-    elif package_name == "podman":
-        command = 'podman ps --format "{{.Names}} {{.ID}}"'
-    else:
-        return []
+    """Get the list of running containers on the remote server."""
+    try:
+        if package_name == "docker":
+            command = 'docker ps --format "{{.Names}} {{.ID}}"'
+        elif package_name == "podman":
+            command = 'podman ps --format "{{.Names}} {{.ID}}"'
+        elif package_name == "/usr/local/bin/docker":
+            command = '/usr/local/bin/docker ps --format "{{.Names}} {{.ID}}"'
+        else:
+            return []
 
-    stdin, stdout, stderr = ssh_client.exec_command(command)
-    containers = stdout.read().decode().splitlines()
-    return [container.split() for container in containers]
+        stdin, stdout, stderr = ssh_client.exec_command(command)
+        output = stdout.read().decode()
+        error = stderr.read().decode()
+        logger.debug(f"Command output: {output}")
+        logger.debug(f"Command error: {error}")
+        containers = output.splitlines()
+        return [container.split() for container in containers]
+    except Exception as e:
+        logger.exception(f"Failed to get running containers for {package_name}: {e}")
+        return []
 
 
 def sort_containers(containers):
