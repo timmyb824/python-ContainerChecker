@@ -2,6 +2,29 @@
 
 
 
+## v0.6.0 (2024-08-08)
+
+### Feature
+
+* feat: Add default path for servers.yaml in argparse options ([`b8c232a`](https://github.com/timmyb824/python-ContainerChecker/commit/b8c232a64b1d11d727a8797c899597311251f7b7))
+
+* feat: Add USER_HOME constant to store user&#39;s home directory ([`f1bd245`](https://github.com/timmyb824/python-ContainerChecker/commit/f1bd2452db2ba51a84103a6d25cae70381f10d23))
+
+### Fix
+
+* fix: add handling for key file not found and store the key file location ([`fd2f724`](https://github.com/timmyb824/python-ContainerChecker/commit/fd2f7247ff7778de67d90cae621f160be7307b62))
+
+### Style
+
+* style: update logging in config.py ([`176c92f`](https://github.com/timmyb824/python-ContainerChecker/commit/176c92f16de17ee9cc1a123de706b8808fe53e75))
+
+### Unknown
+
+* Merge pull request #8 from timmyb824/feat/improve-file-handling
+
+improve handling of config and key file ([`ace12e9`](https://github.com/timmyb824/python-ContainerChecker/commit/ace12e9b1315c8088c4e1d90cca4c2d3a3f59a6c))
+
+
 ## v0.5.0 (2024-08-08)
 
 ### Feature
