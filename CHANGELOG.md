@@ -2,6 +2,23 @@
 
 
 
+## v0.8.0 (2024-08-17)
+
+### Feature
+
+* feat: add timout to ssh connect and remove unused import ([`3295744`](https://github.com/timmyb824/python-ContainerChecker/commit/32957446bd72575efbaadf76f9f6e1b0fede9d46))
+
+### Refactor
+
+* refactor(test_ssh): Add timeout parameter to ssh client connection calls ([`9b7f222`](https://github.com/timmyb824/python-ContainerChecker/commit/9b7f2221c860a6103472f40f3ebb46d697ec9747))
+
+### Unknown
+
+* Merge pull request #10 from timmyb824/feat/add-ssh-timeout
+
+feat/add ssh timeout ([`d1dba1b`](https://github.com/timmyb824/python-ContainerChecker/commit/d1dba1b7eda711bd36b7152400e976ae0e57730b))
+
+
 ## v0.7.0 (2024-08-08)
 
 ### Feature
