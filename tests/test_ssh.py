@@ -20,7 +20,7 @@ class TestSSH(unittest.TestCase):
             result = create_ssh_client("hostname", 22, "username", "password")
             self.assertIsNotNone(result)
             ssh_client.connect.assert_called_once_with(
-                "hostname", 22, username="username", password="password"
+                "hostname", 22, username="username", password="password", timeout=10
             )
 
     def test_create_ssh_client_with_key_authentication(self):
@@ -42,7 +42,7 @@ class TestSSH(unittest.TestCase):
             )
             self.assertIsNotNone(result)
             ssh_client.connect.assert_called_once_with(
-                "hostname", 22, username="username", pkey=key
+                "hostname", 22, username="username", pkey=key, timeout=10
             )
 
     def test_create_ssh_client_with_invalid_credentials(self):
