@@ -8,7 +8,7 @@ with warnings.catch_warnings(action="ignore", category=CryptographyDeprecationWa
 
 from rich import print  # pylint: disable=redefined-builtin
 
-from containerchecker.constants import USER_HOME, console
+from containerchecker.constants import USER_HOME
 from containerchecker.containers import check_installed_package, display_containers
 
 logger = logging.getLogger("rich")
@@ -19,7 +19,7 @@ def create_ssh_client(
 ):
     """Create an SSH client object."""
     logger.debug(f"Creating SSH client for {hostname}")
-    try:
+    try:  # pylint: disable=too-many-try-statements
         ssh_key_file_path = f"{USER_HOME}/.ssh/{key_filename}"
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -28,10 +28,12 @@ def create_ssh_client(
             key = paramiko.Ed25519Key.from_private_key_file(
                 ssh_key_file_path, password=key_password
             )
-            ssh.connect(hostname, port, username=username, pkey=key)
+            ssh.connect(hostname, port, username=username, pkey=key, timeout=10)
             logger.debug(f"Connected to {hostname}")
         else:
-            ssh.connect(hostname, port, username=username, password=password)
+            ssh.connect(
+                hostname, port, username=username, password=password, timeout=10
+            )
         return ssh
     except paramiko.AuthenticationException as e:
         logger.exception(f"Authentication failed: {e}")
