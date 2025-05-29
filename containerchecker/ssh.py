@@ -15,7 +15,13 @@ logger = logging.getLogger("rich")
 
 
 def create_ssh_client(
-    hostname, port, username, password=None, key_filename=None, key_password=None
+    hostname,
+    port,
+    username,
+    password=None,
+    key_filename=None,
+    key_password=None,
+    verbose=False,
 ):
     """Create an SSH client object."""
     logger.debug(f"Creating SSH client for {hostname}")
@@ -36,22 +42,44 @@ def create_ssh_client(
             )
         return ssh
     except paramiko.AuthenticationException as e:
-        logger.exception(f"Authentication failed: {e}")
+        if verbose:
+            logger.exception(f"Authentication failed: {e}")
+            print(f"Authentication failed: {e}")
+        else:
+            logger.debug(f"Authentication failed: {e}")
+            print("Failed to authenticate.")
     except paramiko.SSHException as e:
-        logger.exception(f"SSH connection failed: {e}")
+        if verbose:
+            logger.exception(f"SSH connection failed: {e}")
+            print(f"SSH connection failed: {e}")
+        else:
+            logger.debug(f"SSH connection failed: {e}")
+            print("SSH connection failed.")
     except FileNotFoundError:
-        logger.exception(f"Private key file not found: {key_filename}")
+        if verbose:
+            logger.exception(f"Private key file not found: {key_filename}")
+            print(f"Private key file not found: {key_filename}")
+        else:
+            logger.debug(f"Private key file not found: {key_filename}")
+            print("Private key file not found.")
     except Exception as e:
-        logger.exception(f"An error occurred: {e}")
+        if verbose:
+            logger.exception(f"An error occurred: {e}")
+            print(f"An error occurred: {e}")
+        else:
+            logger.debug(f"An error occurred: {e}")
+            print("An unknown error occurred during SSH connection.")
     return None
 
 
-def process_server(host, port, user, password, ssh_key, ssh_key_password):
+def process_server(
+    host, port, user, password, ssh_key, ssh_key_password, verbose=False
+):
     """Process a server."""
     logger.debug(f"Processing server: {host}")
     try:
         ssh_client = create_ssh_client(
-            host, port, user, password, ssh_key, ssh_key_password
+            host, port, user, password, ssh_key, ssh_key_password, verbose=verbose
         )
 
         if ssh_client is None:
@@ -83,7 +111,12 @@ def process_server(host, port, user, password, ssh_key, ssh_key_password):
             )
 
     except Exception as e:
-        logger.exception(f"Failed to connect to {host}: {e}")
+        if verbose:
+            logger.exception(f"Failed to connect to {host}: {e}")
+            print(f"Failed to connect to {host}: {e}")
+        else:
+            logger.debug(f"Failed to connect to {host}: {e}")
+            print(f"Failed to connect to [bold red]{host}[/bold red]\n")
     finally:
         if "ssh_client" in locals() and ssh_client:
             ssh_client.close()

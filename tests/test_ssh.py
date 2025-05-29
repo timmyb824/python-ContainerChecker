@@ -27,11 +27,14 @@ class TestSSH(unittest.TestCase):
         ssh_client = Mock()
         ssh_client.connect.return_value = None
         key = Mock()
-        with unittest.mock.patch(
-            "containerchecker.ssh.paramiko.SSHClient", return_value=ssh_client
-        ), unittest.mock.patch(
-            "containerchecker.ssh.paramiko.Ed25519Key.from_private_key_file",
-            return_value=key,
+        with (
+            unittest.mock.patch(
+                "containerchecker.ssh.paramiko.SSHClient", return_value=ssh_client
+            ),
+            unittest.mock.patch(
+                "containerchecker.ssh.paramiko.Ed25519Key.from_private_key_file",
+                return_value=key,
+            ),
         ):
             result = create_ssh_client(
                 "hostname",

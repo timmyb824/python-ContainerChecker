@@ -2,3 +2,4 @@ servers.yaml
 .venv/
 __pycache__/
 Archive/
+python_containerchecker.egg-info/

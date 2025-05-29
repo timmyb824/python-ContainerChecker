@@ -54,6 +54,7 @@ def main():
                 server.get("password"),
                 server.get("ssh_key"),
                 server.get("ssh_key_password"),
+                args.verbose,
             )
             for server in server_list
         ]
