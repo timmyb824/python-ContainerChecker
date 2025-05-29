@@ -1,62 +1,65 @@
-[tool.poetry]
+[project]
 name = "python-containerchecker"
 version = "0.8.0"
 description = ""
-authors = ["Tim Bryant <timothybryant3@gmail.com>"]
+authors = [{ name = "Tim Bryant", email = "timothybryant3@gmail.com" }]
 readme = "README.md"
-packages = [{include = "containerchecker", from = "."}]
+requires-python = ">=3.11"
+dependencies = ["paramiko", "PyYAML", "rich"]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-paramiko = "^3.4.0"
-PyYAML = "^6.0.1"
-rich = "^13.7.1"
+[tool.uv]
+default-groups = []
+package = true
 
-[tool.poetry.group.dev.dependencies]
-pre-commit = "^3.3.3"
-pytest = "^8.3.2"
-python-semantic-release = "^8.0.7"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[project.optional-dependencies]
+dev = ["pre-commit", "pytest", "python-semantic-release"]
 
 [tool.pytest.ini_options]
-pythonpath = [
-  ".", "containerchecker"
-]
+pythonpath = [".", "containerchecker"]
 
-[tool.poetry.scripts]
+[project.scripts]
 pcc = "containerchecker.main:main"
 
 [tool.semantic_release.commit_parser_options]
 allowed_tags = [
-    "build",
-    "chore",
-    "refactor",
-    "fix",
-    "perf",
-    "style",
-    "docs",
-    "ci",
-    "test",
-    "feat",
-    ":boom:",
-    "BREAKING_CHANGE",
+  "build",
+  "chore",
+  "refactor",
+  "fix",
+  "perf",
+  "style",
+  "docs",
+  "ci",
+  "test",
+  "feat",
+  ":boom:",
+  "BREAKING_CHANGE",
 ]
 major_tags = [":boom:", "BREAKING_CHANGE"]
 minor_tags = ["feat"]
-patch_tags = ["fix", "perf", "style", "docs", "ci", "test", "refactor", "chore", "build"]
+patch_tags = [
+  "fix",
+  "perf",
+  "style",
+  "docs",
+  "ci",
+  "test",
+  "refactor",
+  "chore",
+  "build",
+]
 
 [tool.semantic_release]
-version_toml = [
-    "pyproject.toml:tool.poetry.version",
-]
+version_toml = ["pyproject.toml:project.version"]
 branch = "main"
 changelog_file = "CHANGELOG.md"
-build_command = "poetry build"
+build_command = "uv build"
 dist_path = "dist/"
 upload_to_vcs_release = true
 upload_to_pypi = false
 remove_dist = false
 patch_without_tag = true
+
+[tool.setuptools.packages.find]
+include = ["containerchecker*"]
+exclude = ["ARCHIVE*", "tests*", "build*"]
