@@ -12,7 +12,7 @@ default-groups = []
 package = true
 
 [project.optional-dependencies]
-dev = ["pre-commit", "pytest", "python-semantic-release"]
+dev = ["pre-commit", "pytest", "python-semantic-release", "black"]
 
 [tool.pytest.ini_options]
 pythonpath = [".", "containerchecker"]
